@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% block blocktile %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/style.css' %}">
+</head>
+<body>
+<!-- Navigation bar -->
+
+<header class="site-header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-info fixed-top">
+        <div class="container">
+            <a class="navbar-brand mr-4" href="/">Pit Blog</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
+                    aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
+                    <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
+                </div>
+                <!-- Navbar Right Side -->
+                <div class="navbar-nav">
+                    {% if user.is_authenticated %}
+                        <a class="nav-item nav-link" href="{% url 'post-create' %}">New Post</a>
+                        <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+                        <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+                    {% else %}
+                        <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                        <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-8">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% block content %}{% endblock %}
+        </div>
+        <div class="col-md-4">
+            <div class="content-section">
+                <h3>Our Sidebar</h3>
+                <p class='text-muted'>You can put any information here you'd like.
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-light">Latest Posts</li>
+                    <li class="list-group-item list-group-item-light">Announcements</li>
+                    <li class="list-group-item list-group-item-light">Calendars</li>
+                    <li class="list-group-item list-group-item-light">etc</li>
+                </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="text-white">
+    <!-- Footer Links -->
+    <div class="container-fluid bg-info text-md-left">
+
+        <!-- Grid row -->
+        <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-md-6 mt-md-0 mt-3">
+                <br>
+                <p class="text-justify">
+                    I started programming in C and Java at high schools, then in Kotlin for Android development and
+                    little else for web development, mainly PHP and MySQL. Moreover, I’m studing C# and Python to
+                    enhance my programming flexibility. I’m very interested in online security, as technology has become
+                    increasingly invasive in our private lives!
+                </p>
+            </div>
+
+            <hr class="clearfix w-100 d-md-none pb-3">
+            <div class="col-md-3 mb-md-0 mb-3">
+                <br>
+                <h5 class="text-white">Social</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="https://www.linkedin.com/in/pietro-poluzzi/" target="_blank">
+                            <img src="https://raw.githubusercontent.com/PitPietro/pitpietro.github.io/50d66855812e40885de51978a4d42ee9cd6d1d66/img/svg/linkedin-icon.svg"
+                                 alt="linedin-svg">
+                        </a>
+                        <p>LinkedIn</p>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/PietroPoluzzi" target="_blank">
+                            <img src="https://raw.githubusercontent.com/PitPietro/pitpietro.github.io/032e666e5ad2fa3f8ef6baaf9feb45a085a06233/img/svg/twitter-icon.svg"
+                                 alt="twitter-svg">
+                        </a>
+                        <p>Twitter</p>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/pietropoluz/" target="_blank">
+                            <img src="https://raw.githubusercontent.com/PitPietro/pitpietro.github.io/50d66855812e40885de51978a4d42ee9cd6d1d66/img/svg/instagram-icon.svg"
+                                 alt="instagram-svg">
+                        </a>
+                        <p>Instagram</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-md-3 mb-md-0 mb-3">
+                <br>
+                <h5 class="text-white">Code</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="https://github.com/PitPietro" target="_blank">
+                            <img src="https://raw.githubusercontent.com/PitPietro/pitpietro.github.io/50d66855812e40885de51978a4d42ee9cd6d1d66/img/svg/github-icon.svg"
+                                 alt="github-svg">
+                        </a>
+                        <p>GitHub</p>
+                    </li>
+                    <li>
+                        <a href="https://gitlab.com/PitPietro" target="_blank">
+                            <img src="https://raw.githubusercontent.com/PitPietro/pitpietro.github.io/032e666e5ad2fa3f8ef6baaf9feb45a085a06233/img/svg/gitlab-icon.svg"
+                                 alt="gitlab-svg">
+                        </a>
+                        <p>GitLab</p>
+                    </li>
+                    <li>
+                        <a href="https://www.gitkraken.com/invite/6cMHa4PF" target="_blank">
+                            <img src="https://raw.githubusercontent.com/PitPietro/pitpietro.github.io/032e666e5ad2fa3f8ef6baaf9feb45a085a06233/img/svg/gitkraken-icon.svg"
+                                 alt="gitkraken-svg">
+                        </a>
+                        <p>GitKraken</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-dark text-white text-center py-3">© 2020 Copyright: Pietro Poluzzi
+    </div>
+
+</footer>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+</body>
+</html>
